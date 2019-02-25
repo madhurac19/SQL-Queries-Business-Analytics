@@ -1,0 +1,204 @@
+Recovering data table for International Census Bureau for age specific fertility rates
+  CODE
+    SELECT *
+    FROM `bigquery-public-data.census_bureau_international.age_specific_fertility_rates`
+    LIMIT 100
+
+  results: 
+    https://docs.google.com/spreadsheets/d/1IemXZ4COwEHFOrlwyc7gHTJuj8UiD9bPLqR-d0Vzyho/edit?usp=sharing
+
+Ordering the Information of Age Specific Fertility according to descending order of the years
+  Code
+     SELECT * 
+     FROM `bigquery-public-data.census_bureau_international.age_specific_fertility_rates` 
+     ORDER BY year DESC 
+     
+   result:
+      https://docs.google.com/spreadsheets/d/1BLyosR73HUJRrbPKAeJLc33JfNakpo1Cx5vt9ZQAiqk/edit?usp=sharing
+
+Displaying only certain data fields to see the relation between fertility rate for the years 
+2015 to and total fertility rate, gross reproduction rate and sex ratio at birth
+
+Code
+    SELECT year, total_fertility_rate, gross_reproduction_rate, sex_ratio_at_birth, FERTILITY_RATE_15_19
+    FROM `bigquery-public-data.census_bureau_international.age_specific_fertility_rates` 
+    
+result:
+  https://docs.google.com/spreadsheets/d/1uUyGFxjGcg6OvH5PZMWUk01SBKNJCybaNmp02peEkdk/edit?usp=sharing
+  
+Displaying only certain data fields to see the relation between fertility rate for the years 2015 to 
+and total fertility rate, gross reproduction rate and sex ratio at birth now ordering by the fertility 
+rates of the specified years in descending order.
+
+  Code
+    SELECT year, total_fertility_rate, gross_reproduction_rate, sex_ratio_at_birth, FERTILITY_RATE_15_19
+    FROM `bigquery-public-data.census_bureau_international.age_specific_fertility_rates` 
+    ORDER BY fertility_rate_15_19 ASC
+    LIMIT 150
+    
+result:
+  https://docs.google.com/spreadsheets/d/1BOk33_bgng3gyehw_JrGvBAFOiyKObN2frq63QqNJMA/edit?usp=sharing
+  
+Finding out for the year 2019 which all countries had sex ratio at birth = a specific value by using the AND and WHERE operand
+  
+  Code
+    SELECT country_name, year, sex_ratio_at_birth
+    FROM `bigquery-public-data.census_bureau_international.age_specific_fertility_rates` 
+    WHERE year = 2019
+    AND sex_ratio_at_birth = 1.05
+    
+result:
+  https://docs.google.com/spreadsheets/d/13PE1NxzdVzH4XH5ENRhXXNg-fxFZLwawAxU2TGx4jhs/edit?usp=sharing
+
+OUTER JOIN QUERY
+
+  Code
+    SELECT primary_type 
+    FROM `bigquery-public-data.austin_crime.crime` 
+    LEFT JOIN `bigquery-public-data.census_bureau_international.age_specific_fertility_rates`
+    ON `bigquery-public-data.austin_crime.crime`.address = `bigquery-public-data.census_bureau_international.age_specific_fertility_rates`.country_name
+results:
+  https://docs.google.com/spreadsheets/d/1M_lNArsaGCY71jx_afGiPF3bIQ4XWbMjnCoEiHJKPSU/edit?usp=sharing
+  
+RIGHT JOIN QUERY OF AUSTIN CRIME DATA AND AVERAGE INTERNATIONAL GE SPECIFIC FERTILITY RATE
+
+  Code
+    SELECT primary_type 
+    FROM `bigquery-public-data.austin_crime.crime` 
+    RIGHT JOIN `bigquery-public-data.census_bureau_international.age_specific_fertility_rates`
+    ON `bigquery-public-data.austin_crime.crime`.address = `bigquery-public-data.census_bureau_international.age_specific_fertility_rates`.country_name
+    
+  result:
+    https://docs.google.com/spreadsheets/d/1ueiXBsHftm_PemIG6e9pCto53w8h7kw9igluSc7xf3M/edit?usp=sharing
+    
+  Sum of all the fertility rates of year 2020 to 2024
+  
+    Code
+      SELECT SUM(fertility_rate_20_24)
+      FROM `bigquery-public-data.census_bureau_international.age_specific_fertility_rates` 
+      
+     result:
+      https://docs.google.com/spreadsheets/d/1JsOGKnW7vkbjEV8v3iHugEX4kc6sjgZLppn3wZvOIOM/edit?usp=sharing
+      
+  Average of total fertility rates 
+  
+  Code
+      SELECT AVG(total_fertility_rate)
+      FROM `bigquery-public-data.census_bureau_international.age_specific_fertility_rates` 
+   result:
+    https://docs.google.com/spreadsheets/d/1JGPfKwrRJg-aUFL700YD2pYzoSI4DVGZhRNrsXOuZYo/edit?usp=sharing
+    
+Average of sex ratio at birth
+  Code
+    SELECT AVG(sex_ratio_at_birth)
+    FROM `bigquery-public-data.census_bureau_international.age_specific_fertility_rates` 
+    
+result:
+  https://docs.google.com/spreadsheets/d/1nRcu8z3zAtZ520bH7zuM2Uw--jGd4Pqr2yBuwzRHoMY/edit?usp=sharing
+
+Bringing all the data out front
+Code
+  SELECT *
+  FROM `bigquery-public-data.austin_crime.crime` 
+  LIMIT 1000
+
+result: 
+  https://docs.google.com/spreadsheets/d/1bAVUKcVFyFzeY9Qc2QSD4ksZiKIEBXsXrx6Xno_ouz0/edit#gid=1087002734
+  
+Getting a specified unique key
+Code
+  SELECT unique_key 
+  FROM `bigquery-public-data.austin_crime.crime` 
+  WHERE unique_key = 2015150483
+
+result : 
+  https://docs.google.com/spreadsheets/d/1xCQdiduQjlCJcKl7kWW6fGL6mjpFRCh1uRE9ItLW93U/edit?usp=sharing
+  
+Ordering the locational Information according descending order of district
+Code
+  SELECT location_description 
+  FROM `bigquery-public-data.austin_crime.crime` 
+  ORDER BY district DESC
+
+result: 
+  https://docs.google.com/spreadsheets/d/1jKRPRR0THeRRVmbVlQJI1oSR__pUgIVl2384br7UAxk/edit?usp=sharing
+  
+Ordering the results by ascending order
+Code
+  SELECT district 
+  FROM `bigquery-public-data.austin_crime.crime` 
+  ORDER BY district ASC
+
+results :
+  https://docs.google.com/spreadsheets/d/1ZJJab0NVsxi_InnnIUwUoTbxRaxpEYp4D4FJySbIy8E/edit?usp=sharing
+  
+Wanting to see district wise what are the kinds of Crime committed 
+Code
+  SELECT address, description 
+  FROM `bigquery-public-data.austin_crime.crime` LIMIT 1000
+
+result : 
+  https://docs.google.com/spreadsheets/d/1y2hh_opDmCn238q8xS1qW2FK09Dsx6jJtO7FRM2ExoM/edit?usp=sharing
+  
+Distinctly selecting two columns to understand on which all date the complaint of the crimes were cleared and not cleared, limiting the data to 12 entries
+Code
+  SELECT DISTINCT clearance_status, clearance_date
+  FROM `bigquery-public-data.austin_crime.crime` LIMIT 12
+
+result: 
+  https://docs.google.com/spreadsheets/d/1zk5ooSCgaHSAlkvo1BV4pYd1Fyvt_-LnoYwTOUpXhqM/edit?usp=sharing
+  
+Distinctly selecting two columns tounderstand on which all dates the complaint of the crimes were clearedand not cleared, ordering the clearance date by descending order
+Code
+  SELECT DISTINCT clearance_status, clearance_date
+  FROM `bigquery-public-data.austin_crime.crime` 
+  ORDER BY clearance_date DESC
+
+result: 
+  https://docs.google.com/spreadsheets/d/145ZRJiU2NnvJWnxm5KwEBYF0nBETiSA4gZg9RH1a3Pk/edit?usp=sharing
+  
+Rounding off the values of x_coordinatefor the 3 decimal places
+Code
+  SELECT ROUND(x_coordinate, 3)
+  FROM `bigquery-public-data.austin_crime.crime` 
+  ORDER BY clearance_date DESC
+  LIMIT 50
+
+result: 
+  https://docs.google.com/spreadsheets/d/1NDOxehxAN_fOo2pEofcLuyic5Q6athdwxp1BGaCThM4/edit?usp=sharing
+  
+Query to find whether any particular column has any null value or not
+Code
+  SELECT unique_key, address, clearance_date, clearance_status, description, district  
+  FROM `bigquery-public-data.austin_crime.crime` 
+  WHERE census_tract IS NULL 
+  AND council_district_code IS NULL 
+  AND latitude IS NULL
+  AND longitude IS NULL
+  AND x_coordinate IS NULL
+  AND y_coordinate IS NULL
+  AND location IS NULL
+  AND location_description IS NULL
+  AND zipcode IS NULL
+
+results: 
+  https://docs.google.com/spreadsheets/d/1CankFcq3SpvbhWQO-YH30rEyfrHclou1LJvh8ic_BfM/edit?usp=sharing
+  
+  SELECT unique_key, address, clearance_date, clearance_status, description, district  
+  FROM `bigquery-public-data.austin_crime.crime` 
+  WHERE census_tract IS NULL 
+  AND council_district_code IS NULL 
+  AND latitude IS NULL
+  AND longitude IS NULL
+  AND x_coordinate IS NULL
+  AND y_coordinate IS NULL
+  AND location IS NULL
+  AND location_description IS NULL
+  AND zipcode IS NULL
+  AND clearance_date IS NULL
+  AND clearance_status IS NULL
+
+results:
+  https://docs.google.com/spreadsheets/d/1WXfpyR-HbByylgF2-KJNavlwkXHvt6u9w7Elbn00Suo/edit?usp=sharing
+
+
